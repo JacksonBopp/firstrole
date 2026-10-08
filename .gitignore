@@ -1,0 +1,17 @@
+# personal data: never commit
+.env
+config/*.json
+config/answers.md
+data/
+logs/
+screenshots/
+*.xlsx
+*.pdf
+__pycache__/
+.playwright-mcp/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+HANDOFF.md
+dashboard*.html

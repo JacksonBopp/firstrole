@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "job-search-os"
+version = "0.1.0"
+description = "A job-search operating system for any AI agent, on any OS: find, screen, track, and apply with a human in the loop."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = ["certifi"]             # CA bundle so HTTPS works on every OS; nothing else
+
+[project.optional-dependencies]
+xlsx = ["openpyxl>=3.1"]               # spreadsheet export
+dev = ["pytest>=8"]
+
+[project.scripts]
+jobos = "jobos.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["jobos*"]
+
+[tool.setuptools.package-data]
+jobos = ["geodata/places.csv.gz"]   # US Census Gazetteer places (public domain), for radius targeting
