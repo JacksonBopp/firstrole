@@ -37,9 +37,9 @@ jobs:
         shell: pwsh
         run: |
           ./install.ps1
-          & "$HOME/firstrole/.venv/Scripts/python.exe" -m firstrole summary
+          & "$HOME/firstrole/.venv/Scripts/python.exe" -m jobos summary
           if ($LASTEXITCODE -ne 0) { exit 1 }
       - if: runner.os != 'Windows'
         run: |
           sh install.sh
-          "$HOME/firstrole/.venv/bin/python" -m firstrole summary
+          "$HOME/firstrole/.venv/bin/python" -m jobos summary
