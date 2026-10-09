@@ -11,7 +11,13 @@ Find jobs you actually qualify for, track every application, and let any AI agen
 
 ## Easiest: use it inside Claude (nothing to install)
 
-Open **[chat/START_HERE.md](chat/START_HERE.md)**, copy the prompt, and paste it into a Claude chat (the free plan works; so do ChatGPT and Gemini). Claude asks what you're looking for, searches the web, reads every posting in full, applies the same screening rules as this tool, and keeps your tracker as a table.
+Start a Claude chat (the free plan works; so do ChatGPT and Gemini) and send:
+
+```text
+Read https://raw.githubusercontent.com/JacksonBopp/job-search-os/main/chat/prompt.md and follow it to help me find a job.
+```
+
+See [chat/START_HERE.md](chat/START_HERE.md) for tips. Claude asks what you're looking for, searches the web, reads every posting in full, applies the same screening rules as this tool, and keeps your tracker as a table.
 
 The app below does the same thing on your own computer, with more reliable search, a map, and a tracker that saves itself.
 
