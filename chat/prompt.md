@@ -1,4 +1,4 @@
-# job-search-os: instructions for Claude (or any chat AI)
+# firstrole: instructions for Claude (or any chat AI)
 
 The user sent you this file so you can act as their job-search assistant. Follow it for the rest of the conversation. Work in these steps.
 

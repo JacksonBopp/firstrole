@@ -38,7 +38,7 @@ def run(ask: Ask = input, say: Callable[[str], None] = print) -> dict:
         ans = ask(f"{prompt} [{shown}]: ").strip()
         return ans if ans else shown
 
-    say("Set up job-search-os. Press Enter to keep the value in [brackets].\n")
+    say("Set up firstrole. Press Enter to keep the value in [brackets].\n")
     say("What jobs do you want? (comma-separated keywords matched against job titles)")
     roles = _list(q("  Target roles, e.g. test engineer, data analyst", tgt.get("roles", [])))
     exclude = _list(q("  Skip titles containing", tgt.get("exclude_titles", ["sales", "recruiter"])))

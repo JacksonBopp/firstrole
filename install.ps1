@@ -1,13 +1,13 @@
-# job-search-os installer for Windows. Paste this into PowerShell:
-#   irm https://raw.githubusercontent.com/JacksonBopp/job-search-os/main/install.ps1 | iex
+# firstrole installer for Windows. Paste this into PowerShell:
+#   irm https://raw.githubusercontent.com/JacksonBopp/firstrole/main/install.ps1 | iex
 #
-# It installs Python if needed (via winget), puts job-search-os in its own folder
-# (~\job-search-os), adds a "Job Search" shortcut to your desktop, and starts it.
+# It installs Python if needed (via winget), puts firstrole in its own folder
+# (~\firstrole), adds a "Job Search" shortcut to your desktop, and starts it.
 # Run it again any time to update. Nothing needs admin rights.
 
 $ErrorActionPreference = "Stop"
-$Dir = if ($env:JOBOS_INSTALL_DIR) { $env:JOBOS_INSTALL_DIR } else { Join-Path $HOME "job-search-os" }
-$Source = if ($env:JOBOS_SOURCE) { $env:JOBOS_SOURCE } else { "https://github.com/JacksonBopp/job-search-os/archive/refs/heads/main.zip" }
+$Dir = if ($env:JOBOS_INSTALL_DIR) { $env:JOBOS_INSTALL_DIR } else { Join-Path $HOME "firstrole" }
+$Source = if ($env:JOBOS_SOURCE) { $env:JOBOS_SOURCE } else { "https://github.com/JacksonBopp/firstrole/archive/refs/heads/main.zip" }
 
 function Get-Python {
     foreach ($cmd in "py", "python") {
@@ -22,7 +22,7 @@ function Get-Python {
     return $null
 }
 
-Write-Host "Installing job-search-os..." -ForegroundColor Cyan
+Write-Host "Installing firstrole..." -ForegroundColor Cyan
 $Python = Get-Python
 if (-not $Python) {
     if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {

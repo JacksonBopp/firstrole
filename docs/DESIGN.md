@@ -1,4 +1,4 @@
-# job-search-os: design
+# firstrole: design
 
 A job-search operating system you run with **any AI coding agent, on any OS**. It finds entry-level roles, reads the full posting, screens for real fit, tracks everything, and fills applications in the browser, with a human approving the final Submit by default.
 

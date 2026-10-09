@@ -1,14 +1,14 @@
 #!/bin/sh
-# job-search-os installer for macOS and Linux. Paste this into Terminal:
-#   curl -fsSL https://raw.githubusercontent.com/JacksonBopp/job-search-os/main/install.sh | sh
+# firstrole installer for macOS and Linux. Paste this into Terminal:
+#   curl -fsSL https://raw.githubusercontent.com/JacksonBopp/firstrole/main/install.sh | sh
 #
-# It puts job-search-os in its own folder (~/job-search-os), adds a "Job Search" icon to
+# It puts firstrole in its own folder (~/firstrole), adds a "Job Search" icon to
 # your Desktop on a Mac, and starts it. Run it again any time to update. No sudo needed.
 set -e
-DIR="${JOBOS_INSTALL_DIR:-$HOME/job-search-os}"
-SRC="${JOBOS_SOURCE:-https://github.com/JacksonBopp/job-search-os/archive/refs/heads/main.zip}"
+DIR="${JOBOS_INSTALL_DIR:-$HOME/firstrole}"
+SRC="${JOBOS_SOURCE:-https://github.com/JacksonBopp/firstrole/archive/refs/heads/main.zip}"
 
-echo "Installing job-search-os..."
+echo "Installing firstrole..."
 PY=""
 for c in python3 python; do
   if command -v "$c" >/dev/null 2>&1 && "$c" -c 'import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)' 2>/dev/null; then

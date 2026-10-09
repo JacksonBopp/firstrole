@@ -110,12 +110,12 @@ def summary(rows: list[dict]) -> list[tuple[str, int]]:
 
 
 def export_xlsx(rows: list[dict], out: Path) -> int:
-    """Write a filtered, styled spreadsheet of everything acted on. Needs `pip install job-search-os[xlsx]`."""
+    """Write a filtered, styled spreadsheet of everything acted on. Needs `pip install firstrole[xlsx]`."""
     try:
         import openpyxl
         from openpyxl.styles import Font, PatternFill
     except ImportError as e:
-        raise SystemExit("Spreadsheet export needs openpyxl: pip install 'job-search-os[xlsx]'") from e
+        raise SystemExit("Spreadsheet export needs openpyxl: pip install 'firstrole[xlsx]'") from e
     shown = sorted((r for r in rows if r["status"] != "Found"), key=lambda r: r["date_applied"] or "", reverse=True)
     wb = openpyxl.Workbook()
     ws = wb.active

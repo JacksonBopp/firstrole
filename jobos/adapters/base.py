@@ -10,7 +10,7 @@ import urllib.error
 import urllib.request
 from dataclasses import dataclass, field
 
-UA = "Mozilla/5.0 (job-search-os; +https://github.com/) Python-urllib"
+UA = "Mozilla/5.0 (firstrole; +https://github.com/JacksonBopp/firstrole) Python-urllib"
 
 
 def _ssl_context() -> ssl.SSLContext:

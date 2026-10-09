@@ -1,7 +1,7 @@
 """Where user data lives. Everything here stays on your machine.
 
 - Inside a checkout of this repo (./data or ./config exists): ./data and ./config, as before.
-- Anywhere else (e.g. started from the desktop shortcut): ~/job-search-os/data and ~/job-search-os/config.
+- Anywhere else (e.g. started from the desktop shortcut): ~/firstrole/data and ~/firstrole/config.
 - JOBOS_HOME / JOBOS_CONFIG override either.
 """
 import os
@@ -12,7 +12,10 @@ def base() -> Path:
     cwd = Path.cwd()
     if (cwd / "data").is_dir() or (cwd / "config").is_dir():
         return cwd
-    return Path.home() / "job-search-os"
+    new, old = Path.home() / "firstrole", Path.home() / "job-search-os"     # renamed 2026-10-09
+    if not (new / "data").is_dir() and (old / "data").is_dir():
+        return old                                                           # keep early users' data
+    return new
 
 
 def home() -> Path:

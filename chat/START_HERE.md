@@ -1,4 +1,4 @@
-# Use job-search-os inside Claude (no install)
+# Use firstrole inside Claude (no install)
 
 Works in the Claude app or claude.ai on any plan, including free. It also works in ChatGPT and Gemini.
 
@@ -7,7 +7,7 @@ Works in the Claude app or claude.ai on any plan, including free. It also works 
 Start a new chat, attach your resume if you have it, and send this:
 
 ```text
-Read https://raw.githubusercontent.com/JacksonBopp/job-search-os/main/chat/prompt.md and follow it to help me find a job.
+Read https://raw.githubusercontent.com/JacksonBopp/firstrole/main/chat/prompt.md and follow it to help me find a job.
 ```
 
 Claude reads the instructions, asks you a few questions (one at a time), then searches, reads each posting in full, and gives you the few jobs that actually fit, plus a tracker table.

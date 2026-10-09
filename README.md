@@ -1,6 +1,8 @@
-# job-search-os
+# firstrole
 
-[![tests](https://github.com/JacksonBopp/job-search-os/actions/workflows/tests.yml/badge.svg)](https://github.com/JacksonBopp/job-search-os/actions/workflows/tests.yml)
+**Land your first role.** A free job-search helper for new grads and career starters, no AI subscription needed.
+
+[![tests](https://github.com/JacksonBopp/firstrole/actions/workflows/tests.yml/badge.svg)](https://github.com/JacksonBopp/firstrole/actions/workflows/tests.yml)
 
 Find jobs you actually qualify for, track every application, and let any AI agent help, on Windows, macOS, or Linux.
 
@@ -14,7 +16,7 @@ Find jobs you actually qualify for, track every application, and let any AI agen
 Start a Claude chat (the free plan works; so do ChatGPT and Gemini) and send:
 
 ```text
-Read https://raw.githubusercontent.com/JacksonBopp/job-search-os/main/chat/prompt.md and follow it to help me find a job.
+Read https://raw.githubusercontent.com/JacksonBopp/firstrole/main/chat/prompt.md and follow it to help me find a job.
 ```
 
 See [chat/START_HERE.md](chat/START_HERE.md) for tips. Claude asks what you're looking for, searches the web, reads every posting in full, applies the same screening rules as this tool, and keeps your tracker as a table.
@@ -27,11 +29,11 @@ The app below does the same thing on your own computer, with more reliable searc
 
 - **Windows:** press Start, type `PowerShell`, press Enter, then paste this and press Enter:
   ```
-  irm https://raw.githubusercontent.com/JacksonBopp/job-search-os/main/install.ps1 | iex
+  irm https://raw.githubusercontent.com/JacksonBopp/firstrole/main/install.ps1 | iex
   ```
 - **Mac:** press Cmd+Space, type `Terminal`, press Enter, then paste this and press Enter:
   ```
-  curl -fsSL https://raw.githubusercontent.com/JacksonBopp/job-search-os/main/install.sh | sh
+  curl -fsSL https://raw.githubusercontent.com/JacksonBopp/firstrole/main/install.sh | sh
   ```
   (If it says Python is needed, install it from [python.org](https://www.python.org/downloads/) first.)
 
@@ -52,15 +54,15 @@ What would you like to do?
 
 > **Using the Claude or ChatGPT chat app?** It can't install the app for you, because chat apps run in a sandbox, not on your computer. Paste the line above yourself (about two minutes), or use the [chat prompt](chat/START_HERE.md) instead. (Claude Code, Codex, and Cursor *can* run it for you: see [Using it with an AI agent](#using-it-with-an-ai-agent).)
 
-Your job list stays on your computer, in a `job-search-os` folder in your home folder. To update, paste the same line again.
+Your job list stays on your computer, in a `firstrole` folder in your home folder. To update, paste the same line again.
 
 ## Quick start for developers
 
 Needs Python 3.10+.
 
 ```bash
-git clone https://github.com/JacksonBopp/job-search-os.git
-cd job-search-os
+git clone https://github.com/JacksonBopp/firstrole.git
+cd firstrole
 python -m pip install -e .
 jobos init
 ```
@@ -115,7 +117,7 @@ Board URLs that work: `boards.greenhouse.io/<co>`, `jobs.lever.co/<co>`, `jobs.a
 
 ## Your data stays on your machine
 
-Everything lives in `~/job-search-os/data` and `~/job-search-os/config`. When you run it inside a checkout of this repo, it uses `./data` and `./config` instead, which are gitignored. Set `JOBOS_HOME` and `JOBOS_CONFIG` to keep them somewhere else. Nothing is uploaded anywhere.
+Everything lives in `~/firstrole/data` and `~/firstrole/config`. When you run it inside a checkout of this repo, it uses `./data` and `./config` instead, which are gitignored. Set `JOBOS_HOME` and `JOBOS_CONFIG` to keep them somewhere else. Nothing is uploaded anywhere.
 
 ## Using it with an AI agent
 
