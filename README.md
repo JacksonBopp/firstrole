@@ -103,7 +103,7 @@ It reads at most 50 results per search, one request every 1.5 seconds. Apply on 
 
 | Command | What it does |
 |---|---|
-| `jobos` | The menu (setup, find jobs, see jobs, update a job) |
+| `jobos` (or `firstrole`) | The menu (setup, find jobs, see jobs, update a job). Both names run the same program |
 | `jobos search` | Search LinkedIn for your saved roles and places, and add the fits to your tracker |
 | `jobos scout <board-url> [--fetch] [--all]` | List jobs on a board that match you (`--all` shows skips and why) |
 | `jobos screen <posting-url>` | Check one posting in depth |
