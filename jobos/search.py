@@ -13,6 +13,7 @@ from urllib.parse import urlencode
 from . import geo, tracker
 from .adapters import linkedin
 from .adapters.base import Posting
+from .score import score as fit_score
 from .screen import Profile, screen
 from .targeting import Targets, location_ok, text_ok, title_ok
 
@@ -68,7 +69,8 @@ def run(t: Targets, prof: Profile, say: Callable[[str], None] = print) -> list[d
     wanted = [p for p in seen.values()
               if title_ok(p.title, t).ok and location_ok(p.location, t).ok]
     say(f"Reading {min(len(wanted), MAX_FETCH)} of {len(wanted)} promising postings in full...")
-    added = []
+    scored: list[tuple[float, dict]] = []
+    weak = 0
     for p in wanted[:MAX_FETCH]:
         try:
             full = linkedin.fetch_posting(p.url)
@@ -84,9 +86,16 @@ def run(t: Targets, prof: Profile, say: Callable[[str], None] = print) -> list[d
             continue
         if full.location.endswith(REMOTE_TAG) and NOT_REMOTE.search(full.text):
             v.flags.append("listed as remote, but the posting mentions hybrid / in-office work: check")
-        notes = "; ".join(v.flags + m.why) or "looks like a fit"
-        added.append(tracker.add(rows, company=full.company, title=full.title, url=full.url,
-                                 location=full.location, category="search", note=f"found by search: {notes}"))
-        say(f"  FIT  {full.company} | {full.title} | {full.location}")
+        s = fit_score(full, v, prof, t, m.why)
+        if s.total < prof.min_score:
+            weak += 1
+            continue
+        notes = "; ".join(v.flags + m.why) or "no flags"
+        row = tracker.add(rows, company=full.company, title=full.title, url=full.url,
+                          location=full.location, category="search", note=f"found by search, fit {s.label()}: {notes}")
+        scored.append((s.total, row))
+        say(f"  {s.label()}  {full.company} | {full.title} | {full.location}")
+    if weak:
+        say(f"  (left out {weak} weak fit(s) scoring under {prof.min_score:g}/5)")
     tracker.save(rows)
-    return added
+    return [row for _, row in sorted(scored, key=lambda x: -x[0])]   # best fit first

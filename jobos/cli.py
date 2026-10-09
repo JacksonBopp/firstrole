@@ -141,7 +141,7 @@ def _run(args) -> int:
 
 
 def _run_screen(args, rows) -> int:
-    from . import adapters, screen, targeting
+    from . import adapters, score, screen, targeting
     prof = screen.Profile.load(max_years=args.max_years, us_citizen=args.citizen,
                                needs_sponsorship=args.sponsorship, include_internships=args.internships)
     tgt = targeting.Targets.load()
@@ -149,8 +149,13 @@ def _run_screen(args, rows) -> int:
     if args.cmd == "screen":
         p = adapters.fetch_posting(args.url)
         v = screen.screen(p, prof)
-        v.flags += targeting.text_ok(p.text, p.location, tgt).why
+        extra = targeting.text_ok(p.text, p.location, tgt).why
+        v.flags += extra
+        s = score.score(p, v, prof, tgt)
         print(f"{p.title} | {p.location} | {p.source}\n  " + v.summary())
+        if v.ok:
+            verdict = "worth applying" if s.total >= prof.min_score else f"weak fit (under {prof.min_score:g})"
+            print(f"  Fit {s.label()}: {verdict}\n" + "\n".join(f"    {r}" for r in s.reasons))
         if p.source == "linkedin" and p.is_open:
             home = adapters.linkedin.company_board(p.company, p.title)
             print(f"  Apply on the company site: {home}" if home else
@@ -161,7 +166,8 @@ def _run_screen(args, rows) -> int:
     except adapters.NotFound:
         print(f"error: no job board found at {args.url} (check the company's board name)", file=sys.stderr)
         return 1
-    shown = off_target = 0
+    off_target = weak = 0
+    results = []                                         # (fit score, label, posting, detail lines)
     for p in found:
         # Cheap checks first: is this a job you WANT? Only then fetch and check if you QUALIFY.
         why_not = [] if args.any_role else [
@@ -180,15 +186,20 @@ def _run_screen(args, rows) -> int:
         if p.text:
             m = targeting.text_ok(p.text, p.location, tgt)
             (v.flags if m.ok else why_not).extend(m.why)
-        ok = v.ok and not why_not
-        if ok or args.all:
-            mark = " [tracked]" if tracker.job_id(p.url) in tracked else ""
-            print(f"{'FIT ' if ok else 'SKIP'} {p.company} | {p.title} | {p.location}{mark}\n     {p.url}")
-            for line in (why_not + v.reasons + v.flags)[:3]:
-                print(f"     - {line}")
-            shown += 1
+        s = score.score(p, v, prof, tgt) if v.ok and not why_not else score.Score(1.0)
+        label = "SKIP" if (why_not or not v.ok) else s.label() if s.total >= prof.min_score else "WEAK"
+        weak += label == "WEAK"
+        if label not in ("SKIP", "WEAK") or args.all:
+            results.append((s.total, label, p, (why_not + v.reasons + v.flags)[:3]))
+    for _, label, p, lines in sorted(results, key=lambda r: -r[0]):      # best fit first
+        mark = " [tracked]" if tracker.job_id(p.url) in tracked else ""
+        print(f"{label:6} {p.company} | {p.title} | {p.location}{mark}\n       {p.url}")
+        for line in lines:
+            print(f"       - {line}")
     tail = f", {off_target} outside your target roles/locations" if off_target else ""
-    print(f"\n{shown} of {len(found)} shown{tail}" + ("" if args.fetch else "  (titles only; add --fetch to screen full text)"))
+    tail += f", {weak} weak fit(s) under {prof.min_score:g}/5" if weak and not args.all else ""
+    print(f"\n{len(results)} of {len(found)} shown{tail}" +
+          ("" if args.fetch else "  (titles only, scores are rough; add --fetch to read each posting)"))
     return 0
 
 

@@ -6,9 +6,10 @@ answers as the defaults, so it doubles as "edit my settings".
 from __future__ import annotations
 
 import json
+import re
 from typing import Callable
 
-from . import geo, paths
+from . import geo, paths, titles
 from .rules import DEFAULTS as RULE_DEFAULTS
 
 Ask = Callable[[str], str]
@@ -41,6 +42,13 @@ def run(ask: Ask = input, say: Callable[[str], None] = print) -> dict:
     say("Set up firstrole. Press Enter to keep the value in [brackets].\n")
     say("What jobs do you want? (comma-separated keywords matched against job titles)")
     roles = _list(q("  Target roles, e.g. test engineer, data analyst", tgt.get("roles", [])))
+    ideas = titles.related(roles)
+    if ideas:
+        say("  Jobs like these often go by other names too:")
+        for i, t in enumerate(ideas, 1):
+            say(f"    {i}. {t}")
+        pick = ask("  Add any? (numbers like 1,3, or Enter to skip): ").strip()
+        roles += [ideas[int(n) - 1] for n in re.findall(r"\d+", pick) if 0 < int(n) <= len(ideas)]
     exclude = _list(q("  Skip titles containing", tgt.get("exclude_titles", ["sales", "recruiter"])))
     say("Where? (separate places with ';')")
     locations = _places(q("  Cities, e.g. Austin, TX; Tampa, FL  (blank = anywhere in your countries)",

@@ -60,6 +60,7 @@ class Profile:
     has_internship: bool = False
     include_internships: bool = False
     advanced_degree: bool = False
+    min_score: float = 3.5             # fit scores below this are "weak fits" (see score.py)
 
     @classmethod
     def load(cls, **overrides) -> "Profile":

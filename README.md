@@ -7,6 +7,8 @@
 Find jobs you actually qualify for, track every application, and let any AI agent help, on Windows, macOS, or Linux.
 
 - **Reads the full posting, not just the title.** It tells "3+ years required" apart from "2-5 years preferred," catches clearance, citizenship, and degree requirements, and flags postings in another language.
+- **Ranks what's left, 1 to 5, and says why.** Role match, experience, location, and things to double-check. Anything under 3.5 is left out, so you see the few jobs worth your evening. No AI needed, and the same answer every time.
+- **Knows the other names your job goes by.** Pick "business analyst" and it offers operations, systems, and reporting analyst too.
 - **Pulls from company job boards directly:** Greenhouse, Lever, Ashby, Workday, Oracle Cloud, SmartRecruiters, Workable, and Amazon, through their public APIs. Optional LinkedIn search reads its public logged-out pages, slowly. No login, no API keys.
 - **One tracker, one source of truth.** A plain CSV that you can open in Excel, plus pacing rules (for example, at most 3 applications per company) that every agent has to follow.
 - **Works with any AI tool, or none.** It's an ordinary command-line tool, so Claude Code, Codex, Cursor, Gemini, or a local model can run it, and so can you.

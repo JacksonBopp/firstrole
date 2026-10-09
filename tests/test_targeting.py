@@ -84,3 +84,12 @@ def test_locate_home_offline():
     p, how = locate_home("Main St & 1st Ave, Tampa, FL", online=False)
     assert p and "Tampa" in how                                 # falls back to the city
     assert locate_home("nowhere at all", online=False)[0] is None
+
+
+def test_related_titles():
+    from jobos.titles import related
+    ba = related(["Business Analyst"])
+    assert "operations analyst" in ba and "business analyst" not in ba
+    mixed = related(["test engineer", "firmware"])
+    assert "qa engineer" in mixed and "firmware engineer" in mixed      # every role gets suggestions
+    assert related(["basket weaver"]) == []

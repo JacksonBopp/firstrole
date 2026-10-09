@@ -125,11 +125,13 @@ def test_init_wizard_writes_settings_and_reuses_them(isolated):
     from jobos import wizard
     from jobos.screen import Profile
     from jobos.targeting import Targets
-    answers = iter(["business analyst, data analyst", "", "Tampa, FL; Orlando, FL", "10", "Tampa, FL",
+    answers = iter(["business analyst, data analyst", "3", "", "Tampa, FL; Orlando, FL", "10", "Tampa, FL",
                     "y", "", "", "1", "y", "n", "n", "2"])
     wizard.run(ask=lambda _: next(answers), say=lambda _: None)
     t = Targets.load()
-    assert t.roles == ["business analyst", "data analyst"] and t.locations == ["Tampa, FL", "Orlando, FL"]
+    from jobos.titles import related
+    assert t.roles == ["business analyst", "data analyst", related(["business analyst", "data analyst"])[2]]
+    assert t.locations == ["Tampa, FL", "Orlando, FL"]
     assert t.radius_miles == 10 and t.center and abs(t.center[0] - 27.97) < 0.05     # offline city lookup
     assert t.exclude_titles == ["sales", "recruiter"] and t.countries == ["United States"]
     assert Profile.load().max_years == 1 and Profile.load().us_citizen

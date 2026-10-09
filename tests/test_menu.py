@@ -50,7 +50,7 @@ def test_search_adds_only_fits_once(monkeypatch):
 
 def test_menu_first_run_search_update_quit(isolated, monkeypatch):
     _fake_linkedin(monkeypatch)
-    answers = iter(["data analyst", "", "Tampa, FL", "", "n", "", "", "2", "y", "n", "n", "3",   # setup
+    answers = iter(["data analyst", "", "", "Tampa, FL", "", "n", "", "", "2", "y", "n", "n", "3",   # setup
                     "1",            # find jobs
                     "3", "1", "1",  # update job 1 -> applied
                     "2",            # dashboard
