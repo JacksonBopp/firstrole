@@ -9,7 +9,13 @@ Find jobs you actually qualify for, track every application, and let any AI agen
 - **One tracker, one source of truth.** A plain CSV that you can open in Excel, plus pacing rules (for example, at most 3 applications per company) that every agent has to follow.
 - **Works with any AI tool, or none.** It's an ordinary command-line tool, so Claude Code, Codex, Cursor, Gemini, or a local model can run it, and so can you.
 
-## Start here (no coding needed)
+## Easiest: use it inside Claude (nothing to install)
+
+Open **[chat/START_HERE.md](chat/START_HERE.md)**, copy the prompt, and paste it into a Claude chat (the free plan works; so do ChatGPT and Gemini). Claude asks what you're looking for, searches the web, reads every posting in full, applies the same screening rules as this tool, and keeps your tracker as a table.
+
+The app below does the same thing on your own computer, with more reliable search, a map, and a tracker that saves itself.
+
+## Start here: the app (no coding needed)
 
 **1. Paste one line.**
 
@@ -38,7 +44,7 @@ What would you like to do?
   5. Quit
 ```
 
-> **Using the Claude or ChatGPT chat app?** It can't install this for you, because chat apps run in a sandbox, not on your computer. Paste the line above yourself; it takes about two minutes. (Claude Code, Codex, and Cursor *can* run it for you: see [Using it with an AI agent](#using-it-with-an-ai-agent).)
+> **Using the Claude or ChatGPT chat app?** It can't install the app for you, because chat apps run in a sandbox, not on your computer. Paste the line above yourself (about two minutes), or use the [chat prompt](chat/START_HERE.md) instead. (Claude Code, Codex, and Cursor *can* run it for you: see [Using it with an AI agent](#using-it-with-an-ai-agent).)
 
 Your job list stays on your computer, in a `job-search-os` folder in your home folder. To update, paste the same line again.
 
