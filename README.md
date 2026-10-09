@@ -9,7 +9,40 @@ Find jobs you actually qualify for, track every application, and let any AI agen
 - **One tracker, one source of truth.** A plain CSV that you can open in Excel, plus pacing rules (for example, at most 3 applications per company) that every agent has to follow.
 - **Works with any AI tool, or none.** It's an ordinary command-line tool, so Claude Code, Codex, Cursor, Gemini, or a local model can run it, and so can you.
 
-## Quick start (5 minutes)
+## Start here (no coding needed)
+
+**1. Paste one line.**
+
+- **Windows:** press Start, type `PowerShell`, press Enter, then paste this and press Enter:
+  ```
+  irm https://raw.githubusercontent.com/JacksonBopp/job-search-os/main/install.ps1 | iex
+  ```
+- **Mac:** press Cmd+Space, type `Terminal`, press Enter, then paste this and press Enter:
+  ```
+  curl -fsSL https://raw.githubusercontent.com/JacksonBopp/job-search-os/main/install.sh | sh
+  ```
+  (If it says Python is needed, install it from [python.org](https://www.python.org/downloads/) first.)
+
+**2. Answer a few questions:** what jobs you want, where, and how much experience you have.
+
+**3. Pick "Find new jobs for me".** It searches, reads every posting, and opens a page in your browser with the jobs that fit you, on a map.
+
+Next time, just double-click **Job Search** on your desktop:
+
+```
+What would you like to do?
+  1. Find new jobs for me
+  2. See my jobs (opens in your browser)
+  3. Update a job (applied, interview, rejected...)
+  4. Change what I'm looking for
+  5. Quit
+```
+
+> **Using the Claude or ChatGPT chat app?** It can't install this for you, because chat apps run in a sandbox, not on your computer. Paste the line above yourself; it takes about two minutes. (Claude Code, Codex, and Cursor *can* run it for you: see [Using it with an AI agent](#using-it-with-an-ai-agent).)
+
+Your job list stays on your computer, in a `job-search-os` folder in your home folder. To update, paste the same line again.
+
+## Quick start for developers
 
 Needs Python 3.10+.
 
@@ -54,6 +87,8 @@ It reads at most 50 results per search, one request every 1.5 seconds. Apply on 
 
 | Command | What it does |
 |---|---|
+| `jobos` | The menu (setup, find jobs, see jobs, update a job) |
+| `jobos search` | Search LinkedIn for your saved roles and places, and add the fits to your tracker |
 | `jobos scout <board-url> [--fetch] [--all]` | List jobs on a board that match you (`--all` shows skips and why) |
 | `jobos screen <posting-url>` | Check one posting in depth |
 | `jobos add --company C --title T --url U` | Start tracking a job |
@@ -68,7 +103,7 @@ Board URLs that work: `boards.greenhouse.io/<co>`, `jobs.lever.co/<co>`, `jobs.a
 
 ## Your data stays on your machine
 
-Everything lives in `data/` and `config/`, which are both gitignored. Set `JOBOS_HOME` and `JOBOS_CONFIG` to keep them somewhere else. Nothing is uploaded anywhere.
+Everything lives in `~/job-search-os/data` and `~/job-search-os/config`. When you run it inside a checkout of this repo, it uses `./data` and `./config` instead, which are gitignored. Set `JOBOS_HOME` and `JOBOS_CONFIG` to keep them somewhere else. Nothing is uploaded anywhere.
 
 ## Using it with an AI agent
 

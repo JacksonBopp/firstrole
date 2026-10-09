@@ -16,3 +16,30 @@ jobs:
       - run: python -m pip install -e ".[dev]"
       - run: python -m pytest -q
       - run: jobos --help
+
+  installer:
+    # The one-line installers non-programmers use, run from this checkout instead of GitHub.
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      JOBOS_SOURCE: ${{ github.workspace }}
+      JOBOS_NO_SHORTCUT: "1"
+      JOBOS_NO_LAUNCH: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          ./install.ps1
+          & "$HOME/job-search-os/.venv/Scripts/python.exe" -m jobos summary
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+      - if: runner.os != 'Windows'
+        run: |
+          sh install.sh
+          "$HOME/job-search-os/.venv/bin/python" -m jobos summary

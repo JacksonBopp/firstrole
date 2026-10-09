@@ -77,5 +77,5 @@ def run(ask: Ask = input, say: Callable[[str], None] = print) -> dict:
     cur["rules"] = {**rul, "max_per_company": cap}
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(cur, indent=2) + "\n", encoding="utf-8")
-    say(f"\nSaved {p}. Try: jobos scout https://boards.greenhouse.io/<company> --fetch")
+    say(f"\nSaved your answers ({p}). You can change them any time.")
     return cur

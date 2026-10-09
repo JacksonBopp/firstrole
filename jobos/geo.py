@@ -96,3 +96,9 @@ def locate_home(text: str, online: bool = True) -> tuple[tuple[float, float] | N
         if p:
             return p, f"center of {parts[i]} (address not found)"
     return None, "not found"
+
+
+def nearest(point: tuple[float, float]) -> str:
+    """Name of the closest US place, e.g. "Tampa, FL" (offline reverse lookup, for search queries)."""
+    (name, st), _ = min(_places().items(), key=lambda kv: haversine_miles(point, kv[1]))
+    return f"{name.title()}, {st}"

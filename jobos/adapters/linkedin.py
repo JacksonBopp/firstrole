@@ -72,7 +72,7 @@ def _cards(page: str) -> list[Posting]:
     return out
 
 
-def list_postings(url: str, search: str = "") -> list[Posting]:
+def list_postings(url: str, search: str = "", pages: int = MAX_PAGES) -> list[Posting]:
     q = parse_qs(urlsplit(url).query)
     params = {k: q[k][0] for k in FILTERS if k in q}
     if search:
@@ -80,7 +80,7 @@ def list_postings(url: str, search: str = "") -> list[Posting]:
     if not params.get("keywords"):
         raise ValueError("Give a LinkedIn search URL with keywords=..., or add --search \"job title\"")
     out: list[Posting] = []
-    for page in range(MAX_PAGES):
+    for page in range(pages):
         try:
             html = _get("seeMoreJobPostings/search", {**params, "start": page * 10})
         except urllib.error.HTTPError as e:

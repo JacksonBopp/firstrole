@@ -37,6 +37,9 @@ def _qfmt(r: dict) -> str:
 def main(argv: list[str] | None = None) -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")  # Windows consoles
+    if not (sys.argv[1:] if argv is None else argv):
+        from . import menu                         # plain `jobos`: the friendly menu
+        return menu.run()
     ap = argparse.ArgumentParser(prog="jobos", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("init", help="guided setup: what jobs you want and where")
@@ -54,6 +57,7 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("summary")
     sub.add_parser("export").add_argument("out")
     sub.add_parser("dashboard", help="write a map + tracker page").add_argument("out", nargs="?", default="dashboard.html")
+    sub.add_parser("search", help="search LinkedIn for your target roles/places; add fits to the tracker")
     sub.add_parser("check").add_argument("company")
     for name in ("screen", "scout"):
         sp = sub.add_parser(name)
@@ -121,6 +125,10 @@ def _run(args) -> int:
             print(f"{n:5}  {status}")
     elif args.cmd == "export":
         print(f"Wrote {tracker.export_xlsx(rows, Path(args.out))} rows to {args.out}")
+    elif args.cmd == "search":
+        from . import search, screen, targeting
+        added = search.run(targeting.Targets.load(), screen.Profile.load())
+        print(f"\nAdded {len(added)} new job(s). See them: jobos dashboard")
     elif args.cmd == "dashboard":
         from . import dashboard
         print(f"Wrote {dashboard.write(rows, Path(args.out))}")

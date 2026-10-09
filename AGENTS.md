@@ -6,7 +6,7 @@ Instructions for any AI agent (Claude Code, Codex, Cursor, Gemini, local models)
 If `config/settings.json` does not exist, run `jobos init` with the user. It asks questions; relay them and enter the user's answers. Do not guess them.
 
 ## Workflow
-1. **Find:** `jobos scout <board-url> --fetch`. It already filters by the user's roles, locations, experience, and eligibility.
+1. **Find:** `jobos search` (LinkedIn, built from the user's saved roles and places) or `jobos scout <board-url> --fetch` (one company's board). Both already filter by the user's roles, locations, experience, and eligibility. If the user isn't comfortable with a terminal, tell them about plain `jobos`, a numbered menu.
 2. **Read:** open each FIT posting in full before recommending it. The screener is a first pass, not a verdict. Report pay, required vs. preferred qualifications, and anything unusual (clearance, relocation, start date, on-site days).
 3. **Shortlist:** recommend a few strong fits, not a long list. Say why each one fits, citing the posting.
 4. **Track:** `jobos add --company C --title T --url U --note "why it fits"` for each one the user keeps.
