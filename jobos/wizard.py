@@ -1,4 +1,4 @@
-"""`jobos init`: a few plain questions that write config/settings.json.
+"""`firstrole init`: a few plain questions that write config/settings.json.
 
 Every answer has a default (press Enter), and running it again shows your current
 answers as the defaults, so it doubles as "edit my settings".

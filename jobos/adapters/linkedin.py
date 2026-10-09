@@ -1,7 +1,7 @@
 """LinkedIn public job search, logged out (the same pages anyone sees without an account).
 
-    jobos scout "https://www.linkedin.com/jobs/search/?keywords=test%20engineer&location=Austin%2C%20TX&f_TPR=r604800"
-    jobos screen https://www.linkedin.com/jobs/view/4475166287
+    firstrole scout "https://www.linkedin.com/jobs/search/?keywords=test%20engineer&location=Austin%2C%20TX&f_TPR=r604800"
+    firstrole screen https://www.linkedin.com/jobs/view/4475166287
 
 Low volume on purpose: a few pages per search with a pause between them, and it stops at the first
 "slow down" (HTTP 429). LinkedIn hides the real apply link from logged-out visitors, so

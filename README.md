@@ -66,15 +66,15 @@ Needs Python 3.10+.
 git clone https://github.com/JacksonBopp/firstrole.git
 cd firstrole
 python -m pip install -e .
-jobos init
+firstrole init
 ```
 
-`jobos init` asks what roles you want, where you want them (cities, a radius around home, remote), and how much experience a job can require. It saves your answers to `config/settings.json`. Run it again anytime to change them.
+`firstrole init` asks what roles you want, where you want them (cities, a radius around home, remote), and how much experience a job can require. It saves your answers to `config/settings.json`. Run it again anytime to change them.
 
 Then point it at a company's job board:
 
 ```bash
-jobos scout https://boards.greenhouse.io/<company> --fetch
+firstrole scout https://boards.greenhouse.io/<company> --fetch
 ```
 
 ```
@@ -91,29 +91,31 @@ Without `--fetch` it checks titles and locations only, which is fast. With `--fe
 **Don't know which companies to try?** Search LinkedIn in your browser (no login needed), copy the search page's URL, and scout that:
 
 ```bash
-jobos scout "https://www.linkedin.com/jobs/search/?keywords=data%20analyst&location=Tampa%2C%20FL" --fetch
-jobos screen https://www.linkedin.com/jobs/view/<id>    # also finds the job on the company's own site
+firstrole scout "https://www.linkedin.com/jobs/search/?keywords=data%20analyst&location=Tampa%2C%20FL" --fetch
+firstrole screen https://www.linkedin.com/jobs/view/<id>    # also finds the job on the company's own site
 ```
 
 It reads at most 50 results per search, one request every 1.5 seconds. Apply on the company's site, not through LinkedIn.
 
-**See it all:** `jobos dashboard` writes `dashboard.html`, a page you open in your browser. It shows a map of your jobs (with your radius, if you set one), your pipeline (Applied, Interviewing, Rejected...), and which follow-ups are due.
+**See it all:** `firstrole dashboard` writes `dashboard.html`, a page you open in your browser. It shows a map of your jobs (with your radius, if you set one), your pipeline (Applied, Interviewing, Rejected...), and which follow-ups are due.
 
 ## Everyday commands
 
 | Command | What it does |
 |---|---|
-| `jobos` (or `firstrole`) | The menu (setup, find jobs, see jobs, update a job). Both names run the same program |
-| `jobos search` | Search LinkedIn for your saved roles and places, and add the fits to your tracker |
-| `jobos scout <board-url> [--fetch] [--all]` | List jobs on a board that match you (`--all` shows skips and why) |
-| `jobos screen <posting-url>` | Check one posting in depth |
-| `jobos add --company C --title T --url U` | Start tracking a job |
-| `jobos update <id> --status Applied --applied 2026-10-08` | Record progress (notes are appended, never overwritten) |
-| `jobos find <text>` / `jobos summary` | Search the tracker / count by status |
-| `jobos check <company>` | Would applying now break one of your pacing rules? |
-| `jobos dashboard` | Map + pipeline + follow-ups page (`dashboard.html`) |
-| `jobos export apps.xlsx` | Spreadsheet of everything you acted on (`pip install -e .[xlsx]`) |
-| `jobos queue add/next/done` | Shared to-apply list when several agents work at once |
+| `firstrole` | The menu (setup, find jobs, see jobs, update a job) |
+| `firstrole search` | Search LinkedIn for your saved roles and places, and add the fits to your tracker |
+| `firstrole scout <board-url> [--fetch] [--all]` | List jobs on a board that match you (`--all` shows skips and why) |
+| `firstrole screen <posting-url>` | Check one posting in depth |
+| `firstrole add --company C --title T --url U` | Start tracking a job |
+| `firstrole update <id> --status Applied --applied 2026-10-08` | Record progress (notes are appended, never overwritten) |
+| `firstrole find <text>` / `firstrole summary` | Search the tracker / count by status |
+| `firstrole check <company>` | Would applying now break one of your pacing rules? |
+| `firstrole dashboard` | Map + pipeline + follow-ups page (`dashboard.html`) |
+| `firstrole export apps.xlsx` | Spreadsheet of everything you acted on (`pip install -e .[xlsx]`) |
+| `firstrole queue add/next/done` | Shared to-apply list when several agents work at once |
+
+(Installed before the rename? `jobos` still works the same way.)
 
 Board URLs that work: `boards.greenhouse.io/<co>`, `jobs.lever.co/<co>`, `jobs.ashbyhq.com/<co>`, `<co>.wd5.myworkdayjobs.com/<site>`, Oracle Cloud career sites, `careers.smartrecruiters.com/<Co>`, `apply.workable.com/<co>`, and `amazon.jobs`.
 

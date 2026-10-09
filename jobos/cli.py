@@ -1,20 +1,20 @@
-"""`jobos` command line. Same commands on Windows, macOS and Linux.
+"""`firstrole` command line. Same commands on Windows, macOS and Linux.
 
-    jobos init                                # guided setup -> config/settings.json
-    jobos find <text>
-    jobos add --company C --title T --url U [--status Found] [--resume R] [--note N]
-    jobos update <id|url> [--status S] [--applied YYYY-MM-DD] [--follow-up D] [--resume R] [--note N]
-    jobos summary
-    jobos export <file.xlsx>
-    jobos check <company>                     # would applying now break a rule?
-    jobos screen <posting-url> [--max-years 2] [--citizen] [--internships]
-    jobos scout <board-url> [--search text] [--max-years 2] [--citizen] [--fetch]
-    jobos queue add --company C --title T --url U [--priority 1-5] [--resume R] [--by agent]
-    jobos queue list [status]
-    jobos queue next [--claim agent]
-    jobos queue done|block|skip <id> [--note N]
-    jobos queue release <id>
-    jobos queue stale [--hours 3]
+    firstrole init                                # guided setup -> config/settings.json
+    firstrole find <text>
+    firstrole add --company C --title T --url U [--status Found] [--resume R] [--note N]
+    firstrole update <id|url> [--status S] [--applied YYYY-MM-DD] [--follow-up D] [--resume R] [--note N]
+    firstrole summary
+    firstrole export <file.xlsx>
+    firstrole check <company>                     # would applying now break a rule?
+    firstrole screen <posting-url> [--max-years 2] [--citizen] [--internships]
+    firstrole scout <board-url> [--search text] [--max-years 2] [--citizen] [--fetch]
+    firstrole queue add --company C --title T --url U [--priority 1-5] [--resume R] [--by agent]
+    firstrole queue list [status]
+    firstrole queue next [--claim agent]
+    firstrole queue done|block|skip <id> [--note N]
+    firstrole queue release <id>
+    firstrole queue stale [--hours 3]
 """
 from __future__ import annotations
 
@@ -38,9 +38,9 @@ def main(argv: list[str] | None = None) -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")  # Windows consoles
     if not (sys.argv[1:] if argv is None else argv):
-        from . import menu                         # plain `jobos`: the friendly menu
+        from . import menu                         # plain `firstrole`: the friendly menu
         return menu.run()
-    ap = argparse.ArgumentParser(prog="jobos", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap = argparse.ArgumentParser(prog="firstrole", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("init", help="guided setup: what jobs you want and where")
     sub.add_parser("find").add_argument("text")
@@ -128,7 +128,7 @@ def _run(args) -> int:
     elif args.cmd == "search":
         from . import search, screen, targeting
         added = search.run(targeting.Targets.load(), screen.Profile.load())
-        print(f"\nAdded {len(added)} new job(s). See them: jobos dashboard")
+        print(f"\nAdded {len(added)} new job(s). See them: firstrole dashboard")
     elif args.cmd == "dashboard":
         from . import dashboard
         print(f"Wrote {dashboard.write(rows, Path(args.out))}")

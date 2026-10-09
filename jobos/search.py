@@ -1,4 +1,4 @@
-"""`jobos search` / menu "Find new jobs": turn your settings into searches, so nobody has to paste URLs.
+"""`firstrole search` / menu "Find new jobs": turn your settings into searches, so nobody has to paste URLs.
 
 Your target roles x your places (plus remote) become LinkedIn logged-out searches. Results go through
 the same filters as `scout --fetch`, and the fits are added to your tracker as "Found".
@@ -27,7 +27,7 @@ MAX_ROLES, MAX_PLACES, MAX_FETCH = 6, 3, 30
 def plan(t: Targets) -> list[dict]:
     """The searches to run: one per (role, place), plus one remote search per role."""
     if not t.roles:
-        raise ValueError("Tell me what jobs you want first (setup: 'jobos init').")
+        raise ValueError("Tell me what jobs you want first (setup: 'firstrole init').")
     places = t.locations[:MAX_PLACES]
     if not places and t.center:
         places = [geo.nearest((t.center[0], t.center[1]))]

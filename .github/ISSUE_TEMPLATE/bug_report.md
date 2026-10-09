@@ -4,7 +4,7 @@ about: Something didn't work the way you expected
 labels: bug
 ---
 
-**What did you do?** (for example: "picked 1. Find new jobs" or "ran `jobos scout <url>`")
+**What did you do?** (for example: "picked 1. Find new jobs" or "ran `firstrole scout <url>`")
 
 **What did you expect?**
 

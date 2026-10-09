@@ -15,7 +15,7 @@ jobs:
           python-version: ${{ matrix.python }}
       - run: python -m pip install -e ".[dev]"
       - run: python -m pytest -q
-      - run: jobos --help
+      - run: firstrole --help
 
   installer:
     # The one-line installers non-programmers use, run from this checkout instead of GitHub.
@@ -37,9 +37,9 @@ jobs:
         shell: pwsh
         run: |
           ./install.ps1
-          & "$HOME/firstrole/.venv/Scripts/python.exe" -m jobos summary
+          & "$HOME/firstrole/.venv/Scripts/python.exe" -m firstrole summary
           if ($LASTEXITCODE -ne 0) { exit 1 }
       - if: runner.os != 'Windows'
         run: |
           sh install.sh
-          "$HOME/firstrole/.venv/bin/python" -m jobos summary
+          "$HOME/firstrole/.venv/bin/python" -m firstrole summary

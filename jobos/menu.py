@@ -1,4 +1,4 @@
-"""`jobos` with no arguments: a numbered menu, for people who don't live in a terminal."""
+"""`firstrole` with no arguments: a numbered menu, for people who don't live in a terminal."""
 from __future__ import annotations
 
 import webbrowser

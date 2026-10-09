@@ -1,4 +1,4 @@
-"""`jobos dashboard [out.html]`: one self-contained HTML page for the tracker.
+"""`firstrole dashboard [out.html]`: one self-contained HTML page for the tracker.
 
 A map of where your jobs are relative to your target center (radius circle when set), and an
 easy-to-read tracker: pipeline counts, follow-ups due, search and status filters. No server:
